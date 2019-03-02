@@ -1,0 +1,1 @@
+// INSERT INTO `Querier`.`Query` (`QueryId`, `QueryName`, `QueryOwner`, `IsActive`, `QueryString`, `Params`, `QueryTitle`) VALUES (1,"Select Employee", NULL, 1, "Select * from Employee", NULL, "Employee Id:EmployeeName:EmployeeSalary");
