@@ -1,13 +1,14 @@
-
 class Querier {
     queriesList = [];
-		selectedOption = {};
-		queryResponse = {};
+	selectedOption = {};
+	queryResponse = {};
 
-    constructor() {}
+    constructor() {
+		console.log('Init Querier');
+	}
 
-    generateSelectOptions(response) {
-        return response.map((option) => {
+    generateSelectOptions() {
+        return this.queriesList.map((option) => {
             return `<option class="select-option" id=${option.id}>${option.name}</option>`;
         });
     }
@@ -16,58 +17,66 @@ class Querier {
         return params.map((param, index) => {
             return `<div class="input-field">
                 <label class="param-label" for="param1">${param}</label>
-                <input id="${param}" class="param-input" required/>
+                <input id="input-${index}" name="${param}" class="param-input" required/>
             </div>`;
         });
-		}
+	}
 		
-		generateResponseGrid (queryResponse) {
-			return queryResponse;
-		}
+	generateResponseGrid () {
+		return this.queryResponse;
+	}
 
-    fetchParameters (id) {
+    fetchParameters (value) {
         this.selectedOption = this.queriesList.find((option) => {
-            return option.id === id;
-        });
-        return this.generateParamInputs(this.selectedOption.params);
-		}
-		
-		fetchQueryResponse (params) {
-			return new Promise((resolve, reject) => {
-				$.post('/api/executeQuery', params, function(response) {
-					this.queryResponse = response;
-					this.generateResponseGrid(queryResponse)
-				});
-			})
-		}
+            return option.name === value;
+		});
+		const params = this.selectedOption.params.split(';')
+        return this.generateParamInputs(params);
+	}
+
+	fetchQueryResponse (params) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+			$.post('/api/executeQuery', params, function(response) {
+				const parsedResponse = JSON.parse(response);
+				self.queryResponse = parsedResponse.results;
+				resolve(self.generateResponseGrid());
+			});
+		})
+	}
 
     fetchQueriesList () {
+		let self = this;
         return new Promise((resolve, reject) => {
             $.get('/api/getQueriesList', function(response) {
-                console.log(response);
-                this.queriesList = response;  
-                resolve(this.generateSelectOptions(response));
+                const parsedResponse = JSON.parse(response);
+                self.queriesList = parsedResponse.queries;
+                resolve(self.generateSelectOptions());
             });
         });
     }
 }
 
+const querier = new Querier();
+
+$(document).ready(function() {
+    querier.fetchQueriesList().then((queriesList) => {
+		$('select#querySelector').html('').append(queriesList);
+		$('select#querySelector').trigger('change');
+    });
+});
+
 $('select#querySelector').on('change', function(event) {
-		$('#responseGrid').html('');
-		const paramList = querier.fetchParameters(event.target.id);
-		$('#paramsSection').html('').append(queriesList);
+	$('#responseGrid').html('');
+	const paramList = querier.fetchParameters(event.target.value);
+	$('#paramsSection').html('').append(paramList);
 });
 
 $('#querierForm').on('submit', function(event) {
-    const paramVal = this.form.serialize();
-    querier.fetchQueryResponse(paraVal).then((queryResponse) => {
-				console.log(queryResponse);
-    });
-});
-
-$(document).ready(function() {
-    const querier = new Querier();
-    querier.fetchQueriesList().then((queriesList) => {
-        $('select#querySelector').html('').append(queriesList);
-    });
+	event.preventDefault();
+    const paramVal = $(this).serializeArray();
+    querier.fetchQueryResponse(paramVal).then((queryResponse) => {
+		console.log(queryResponse);
+	});
+	return false;
 });
