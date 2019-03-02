@@ -13,8 +13,8 @@ app.config['MYSQL_DATABASE_DB'] = 'querier'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
-conn = mysql.connect()
-cursor = conn.cursor()
+#conn = mysql.connect()
+#cursor = conn.cursor()
 
 #routing
 @app.route("/")

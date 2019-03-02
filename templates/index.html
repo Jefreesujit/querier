@@ -1,24 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
- 
-<head>
-    <title>Querier</title>
-    <link href="../static/index.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h3 class="text-muted">Python Flask App</h3>
+    <head>
+        <meta charset="utf-8" />
+        <title>Querier</title>
+        <meta name="description" content="Querier" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="../static/index.css" type="text/css" />
+  </head>
+  <body>
+  <header id="header">
+      <div class="row">
+        <div class="logo-icon">
         </div>
-        <main class="main">
+        <div class="page-header">
+          Querier
+        </div>
+      </div>
+    </header>
+    <main id="body">
+      <div class="">
+        <div id="container" class="page-container">
+            <div class="caption">An app to query and retrive values through UI</div>
             <div class="content">
-                Content Goes Here
+                <div class="selector-section">
+                    <div class="selector-label">Select the query you want to execute</div>
+                    <select id="querySelector"></select>
+                </div>
+                <div class="form-section">
+                    <form id="querierForm">
+                        <div id="paramsSection">
+                            <div class="input-field">
+                                <label class="param-label" for="param1">Parameter Name</label>
+                                <input id="param1" class="param-input" required/>
+                            </div>
+                            <div class="input-field">
+                                <label class="param-label" for="param1">Parameter Name</label>
+                                <input id="param1" class="param-input" required/>
+                            </div>
+                            <div class="input-field">
+                                <label class="param-label" for="param1">Parameter Name</label>
+                                <input id="param1" class="param-input" required/>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-submit" value="Fetch Details" />
+                    </form>
+                </div>
+                <div class="display-section">
+                    <table id="table">
+
+                    </table>
+                </div>
             </div>
-        </main>
-        <footer class="footer">
-        </footer>
-    </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+        <div class="footer"></div>
+    </footer>
     <script type="text/javascript" src="../static/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="../static/index.js"></script>
-</body>
 </html>
