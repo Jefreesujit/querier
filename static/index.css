@@ -1,0 +1,143 @@
+
+html {
+    line-height: 1.5;
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    color: rgba(0,0,0,0.87);
+    scroll-behavior: smooth;
+}
+
+.col {
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  header {
+    padding-top: 10px;
+    background: #26a69a;
+    border-bottom: 4px solid #eaeaea;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+  }
+
+  .page-header {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 300;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .pane-title {
+    margin-bottom: 10px;
+  }
+  
+  .page-container {
+    /* min-height: 100vh; */
+  }
+
+  .left-pane, .right-pane {
+    margin: 5%;
+    float: left;
+    width: 40%;
+    box-sizing: border-box;
+  }
+  .center-pane {
+    margin: 5% 15%;
+  }
+
+  .caption {
+    height: 40px;
+    line-height: 40px;
+    font-size: 24px;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .hide {
+      display: none;
+  }
+
+  .page-container {
+    text-align: center;
+  }
+
+  .content {
+      margin: 20px;
+  }
+
+  .selector-section, .form-section {
+    width: 600px;
+    margin: 30px auto;
+  }
+  
+  select#querySelector {
+      font-size: 20px;
+      width: 350px;
+      padding: 5px;
+      height: 50px;
+  }
+
+  .input-field {
+      margin: 10px;
+  }
+
+  .param-label {
+    font-size: 22px;
+    width: 250px;
+    display: inline-block;
+  }
+
+  .param-input {
+    font-size: 20px;
+    width: 310px;
+    padding: 5px;
+  }
+
+  .selector-label {
+    font-size: 18px;
+    margin: 10px;
+  }
+
+  .btn.btn-submit {
+    margin-top: 20px;
+    padding: 0px 30px;
+    height: 60px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #26a69a;
+    letter-spacing: .5px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px 0px grey;
+  }
+
+  .display-section {
+    width: 80%;
+    margin: 50px auto;
+  }
+
+  table#responseGrid {
+    width: 100%;
+    margin: 30px auto;
+    border: 1px solid lightgrey;
+  }
+
+  table#responseGrid td, table#responseGrid th {
+    padding: 5px 10px;
+  }
+
+  table#responseGrid th {
+    background-color: lightgrey;
+  }
+
+  table#responseGrid tr:nth-child(even) {
+    background-color: #eee;
+  }
