@@ -44,7 +44,8 @@ class Querier {
 	fetchQueryResponse (params) {
 		let self = this;
 		return new Promise((resolve, reject) => {
-			$.post('/api/executeQuery', params, function(response) {
+            const queryId = self.selectedOption.id;
+			$.post(`/api/executeQuery/${queryId}`, params, function(response) {
 				const parsedResponse = JSON.parse(response);
 				self.queryResponse = parsedResponse.result;
 				resolve(self.generateResponseGrid());
