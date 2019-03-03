@@ -1,14 +1,14 @@
 # imports
 from flask import Flask, render_template, request, json
 from flaskext.mysql import MySQL
-
+import pprint
 #create instances
 app = Flask(__name__)
 mysql = MySQL()
 
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
 app.config['MYSQL_DATABASE_DB'] = 'querier'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -24,8 +24,18 @@ def main():
 @app.route('/api/getQueriesList',methods=['GET'])
 def fetchQueryList():
     #fetch query list, send it as response
-    return json.dumps({'queries': [] })
-
+    cursor.execute("select querySeqID,queryName,inputParams from query;")
+    result = cursor.fetchall()
+    k=[]
+    print(len(result))
+    return len(result)
+'''    for i in range(0,len(result)-1):
+        print i
+        j={"id":result[i][0],"name":result[i][1],"params":result[i][2]}
+        k.append(j)
+        print(k)'''
+        
+ 
 @app.route('/api/executeQuery',methods=['POST'])
 def executeQuery():
     #fetch query list, send it as response
@@ -43,5 +53,7 @@ def executeQuery():
 
 #start
 if __name__ == "__main__":
-    app.run()
+    cursor.execute("select * from employee");
+    result = cursor.fetchall()
+    app.run(host="0.0.0.0",port="12345")
 
