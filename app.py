@@ -23,7 +23,7 @@ cursor = conn.cursor()
 def main():
     return render_template('index.html')
 
-@app.route('/api/getQueriesList',methods=['GET'])
+@app.route('/api/getQueriesList', methods=['GET'])
 def fetchQueryList():
     #fetch query list, send it as response
     cursor.execute("select querySeqID,queryName,inputParams from query;")
@@ -43,7 +43,7 @@ def fetchQueryList():
     return json.dumps({'queries': queryList })
 
 
-@app.route('/api/executeQuery/<queryId>',methods=['POST'])
+@app.route('/api/executeQuery/<queryId>', methods=['POST'])
 def executeQuery(queryId):
     #fetch query list, send it as response
     cursor.execute("select querySeqID,query,displayTitle from query where querySeqID = " + queryId + ";")
@@ -73,6 +73,4 @@ def executeQuery(queryId):
 
 #start
 if __name__ == "__main__":
-    cursor.execute("select * from employee")
-    result = cursor.fetchall()
     app.run()
